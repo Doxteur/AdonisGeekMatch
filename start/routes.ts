@@ -20,13 +20,28 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', 'UsersController.index')
-
-Route.post('login', 'AuthController.login')
+import './routes/AuthRoutes'
+import './routes/FilterRoutes'
+import './routes/IntegrationRoutes'
+import './routes/InterestRoutes'
+import './routes/MatcheRoutes'
+import './routes/MessageRoutes'
+import './routes/ProfileRoutes'
+import './routes/ReportRoutes'
+import './routes/RewardRoutes'
+import './routes/SwipeRoutes'
+import './routes/UserInterestRoutes'
+import './routes/UserRewardRoutes'
+import './routes/UserRoutes'
 
 // Route that need authentication
 Route.group(() => {
-  Route.get('users', 'UsersController.me')
+  Route.get('users', 'UserController.me')
 }).middleware('auth:api')
 
-
+// Testing routes
+Route.group(() => {
+  Route.get('/monitor/status', async ({ response }) => {
+    return response.json({ message: 'API Working as expected!' })
+  })
+}).prefix('testing')
