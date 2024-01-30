@@ -35,9 +35,11 @@ import './routes/UserRewardRoutes'
 import './routes/UserRoutes'
 
 // Route that need authentication
+/*
 Route.group(() => {
   Route.get('users', 'UserController.me')
 }).middleware('auth:api')
+*/
 
 // Testing routes
 Route.group(() => {
