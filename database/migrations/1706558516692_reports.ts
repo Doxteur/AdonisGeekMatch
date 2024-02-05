@@ -6,8 +6,8 @@ export default class Reports extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('reporter_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
-      table.integer('reported_user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
+      table.integer('reporter_id').unsigned().references('id').inTable('users')
+      table.integer('reported_user_id').unsigned().references('id').inTable('users')
       table.text('reason')
       table.timestamp('date_reported', { useTz: true })
       table.timestamps(true)

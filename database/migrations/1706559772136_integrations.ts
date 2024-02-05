@@ -6,7 +6,7 @@ export default class Integrations extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
+      table.integer('user_id').unsigned().references('id').inTable('users')
       table.string('platform').notNullable()
       table.string('integration_token').nullable()
       table.text('integration_details').nullable()

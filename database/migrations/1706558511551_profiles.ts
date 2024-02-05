@@ -6,7 +6,7 @@ export default class Profiles extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
+      table.integer('user_id').unsigned().references('id').inTable('users')
       table.string('photo1').nullable()
       table.string('photo2').nullable()
       table.text('bio').nullable()
