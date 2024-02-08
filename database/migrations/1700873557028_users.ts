@@ -12,7 +12,6 @@ export default class extends BaseSchema {
       table.string('password', 180).notNullable()
       table.string('remember_me_token').nullable()
 
-      // Utilisation de timestampz pour PostgreSQL et DATETIME2 pour MSSQL
       table.timestamp('created_at', { useTz: true }).notNullable()
       table.timestamp('updated_at', { useTz: true }).notNullable()
     })

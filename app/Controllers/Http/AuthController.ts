@@ -32,7 +32,7 @@ export default class AuthController {
     }
 
     // Register a new user
-    public async register({ request, response }: HttpContextContract) {
+    public async register({ request, response, auth }: HttpContextContract) {
         const validationSchema = schema.create({
             first_name: schema.string({ trim: true }),
             name: schema.string({ trim: true }),
