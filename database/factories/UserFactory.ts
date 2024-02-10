@@ -8,7 +8,7 @@ export const UserFactory = Factory
   .define(User, async ({ faker }) => {
     return {
       email: faker.internet.email(),
-      password: await Hash.make(faker.internet.password()),
+      password: 'password',
       first_name: faker.name.firstName(),
       name: faker.name.lastName(),
     }

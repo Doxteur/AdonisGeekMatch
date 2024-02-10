@@ -18,15 +18,11 @@ export default class AuthController {
         const email = validatedData.email;
         const password = validatedData.password;
 
-        console.log('back2', validatedData)
 
         // Attempt to authenticate the user
         const user = await auth.attempt(email, password);
-        console.log('back3', user)
         if (user) {
-            const token = await auth.use('api').generate(user);
-            console.log('back4', token)
-            return response.json({ token: token.token, user: user });
+            return response.json({user: user });
         } else {
             return response.status(401).json({ error: 'Invalid credentials' });
         }
@@ -52,7 +48,7 @@ export default class AuthController {
         user.first_name = validatedData.first_name;
         user.name = validatedData.name;
         user.email = validatedData.email;
-        user.password = await Hash.make(validatedData.password);
+        user.password = validatedData.password;
         await user.save();
 
         // Generate token for the user
