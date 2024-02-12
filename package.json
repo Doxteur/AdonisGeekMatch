@@ -19,7 +19,6 @@
   ],
   "devDependencies": {
     "@adonisjs/assembler": "^5.9.6",
-    "@adonisjs/hash": "^3.0.0",
     "@japa/preset-adonis": "^1.2.0",
     "@japa/runner": "2.5.1",
     "@types/proxy-addr": "^2.0.3",
@@ -43,6 +42,7 @@
     "mysql2": "^3.6.5",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
+    "socket.io": "^4.7.4",
     "source-map-support": "^0.5.21"
   }
 }

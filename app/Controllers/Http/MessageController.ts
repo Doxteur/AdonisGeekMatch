@@ -1,6 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Message from 'App/Models/Message';
 
+import { setupWebSocket } from '../../../start/socket/socket';
+const io = setupWebSocket();
+
 export default class MessageController {
     // Get all messages
     public async index({ response }: HttpContextContract) {
@@ -12,6 +15,9 @@ export default class MessageController {
     public async store({ request, response }: HttpContextContract) {
         const messageData = request.only(['content', 'timestamp', 'senderId', 'receiverId']);
         const message = await Message.create(messageData);
+
+        io.emit('chat.message', message);
+
         return response.status(201).json(message);
     }
 
