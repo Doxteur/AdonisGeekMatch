@@ -1,8 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Message from 'App/Models/Message';
-
-import { setupWebSocket } from '../../../start/socket/socket';
-const io = setupWebSocket();
+import Ws from '../../Services/Ws';
 
 export default class MessageController {
     // Get all messages
@@ -13,10 +11,18 @@ export default class MessageController {
 
     // Create a message
     public async store({ request, response }: HttpContextContract) {
+        console.log("store function called with data:", request.body());
         const messageData = request.only(['content', 'timestamp', 'senderId', 'receiverId']);
+        console.log("Creating message with:", messageData);
         const message = await Message.create(messageData);
+        console.log("Message created:", message);
 
-        io.emit('chat.message', message);
+        // Générer l'identifiant de la salle (roomId) en utilisant senderId et receiverId
+        const roomId = `${Math.min(message.senderId, message.receiverId)}-${Math.max(message.senderId, message.receiverId)}`;
+        console.log(`Emitting message to room: ${roomId}`, message);
+
+        // Émettre le message à la salle spécifiée
+        Ws.io.to(roomId).emit('chat.message', message);
 
         return response.status(201).json(message);
     }
